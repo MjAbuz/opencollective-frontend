@@ -6,7 +6,8 @@ env:
   CI: true
   TZ: UTC
   E2E_TEST: 1
-  NODE_ENV: ci
+  NODE_ENV: test
+  OC_ENV: ci
   PGHOST: localhost
   PGUSER: postgres
   WEBSITE_URL: http://localhost:3000
