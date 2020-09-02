@@ -17,7 +17,6 @@ import { withUser } from '../UserProvider';
 const ContributorCardWithTier = ({ contribution, ...props }) => {
   const collective = contribution.toAccount;
   const pendingOrder = contribution.status === ORDER_STATUS.PENDING;
-
   return (
     <StyledCollectiveCard
       {...props}
@@ -65,6 +64,7 @@ const ContributorCardWithTier = ({ contribution, ...props }) => {
                 <FormattedMoneyAmount
                   amount={(contribution.amount.value + (contribution.platformContributionAmount?.value || 0)) * 100}
                   currency={contribution.amount.currency}
+                  frequency={contribution.frequency}
                 />
               </P>
               {contribution.platformContributionAmount?.value && (

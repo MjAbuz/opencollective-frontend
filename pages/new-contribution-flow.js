@@ -295,6 +295,7 @@ const accountFieldsFragment = gqlV2/* GraphQL */ `
       parent {
         id
         slug
+        settings
         location {
           country
         }
@@ -304,6 +305,7 @@ const accountFieldsFragment = gqlV2/* GraphQL */ `
       parent {
         id
         slug
+        settings
         location {
           country
         }

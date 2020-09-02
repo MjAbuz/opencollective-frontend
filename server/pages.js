@@ -107,6 +107,29 @@ if (process.env.NEW_CONTRIBUTION_FLOW && process.env.NEW_CONTRIBUTION_FLOW !== '
   createOrderPage = 'new-contribution-flow';
   orderSuccessPage = 'new-contribution-flow';
   contributionFlowSteps += '|profile|success';
+
+  // Add legacy pages
+  pages
+    .add(
+      'orderCollectiveLegacy',
+      `/:collectiveSlug/legacy/:verb(donate|pay|order|events)/:step(${contributionFlowSteps})?`,
+      'createOrder',
+    )
+    .add(
+      'orderTierLegacy',
+      `/:collectiveSlug/legacy/:verb(contribute)/:tierSlug?-:tierId([0-9]+)/checkout/:step(${contributionFlowSteps})?`,
+      'createOrder',
+    )
+    .add(
+      'orderCollectiveLegacySuccess',
+      '/:collectiveSlug/legacy/:verb(donate|pay|order|events)/:step(success)',
+      'orderSuccess',
+    )
+    .add(
+      'orderTierLegacySuccess',
+      '/:collectiveSlug/legacy/:verb(contribute)/:tierSlug?-:tierId([0-9]+)/checkout/:step(success)',
+      'orderSuccess',
+    );
 } else {
   pages.add(
     'new-donate',
