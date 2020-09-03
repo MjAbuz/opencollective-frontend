@@ -6,6 +6,7 @@ import Tickets from './edit-collective/sections/Tickets';
 import Button from './Button';
 import InputField from './InputField';
 import TimezonePicker from './TimezonePicker';
+import StyledButton from './StyledButton';
 
 class EditEventForm extends React.Component {
   static propTypes = {
@@ -50,6 +51,14 @@ class EditEventForm extends React.Component {
         id: 'event.location.label',
         defaultMessage: 'location',
       },
+      'privateInstructions.label': {
+        id: 'event.privateInstructions.label',
+        defaultMessage: 'Private instructions',
+      },
+      privateInstructionsDescription: {
+        id: 'event.privateInstructions.description',
+        defaultMessage: 'These instructions will be provided by email to the participants.',
+      },
     });
   }
 
@@ -80,9 +89,7 @@ class EditEventForm extends React.Component {
         value = newEndDate.toString();
         event['endsAt'] = value;
       }
-    }
-
-    if (fieldname === 'name') {
+    } else if (fieldname === 'name') {
       if (!event['name'].trim()) {
         this.setState({ disabled: true });
       } else {
@@ -100,6 +107,8 @@ class EditEventForm extends React.Component {
   }
 
   async handleSubmit() {
+    console.log(this.state.event);
+    return;
     this.props.onSubmit({ ...this.state.event, tiers: this.state.tiers });
   }
 
@@ -159,6 +168,12 @@ class EditEventForm extends React.Component {
         placeholder: '',
         type: 'location',
       },
+      {
+        name: 'privateInstructions',
+        description: intl.formatMessage(this.messages.privateInstructionsDescription),
+        type: 'textarea',
+        maxLength: 10000,
+      },
     ];
 
     this.fields = this.fields.map(field => {
@@ -195,8 +210,10 @@ class EditEventForm extends React.Component {
               margin: 0 auto;
             }
 
-            :global(textarea[name='longDescription']) {
-              height: 50rem;
+            :global(textarea[name='privateInstructions']) {
+              min-height: 75px;
+              font-size: 12px;
+              max-width: 100%;
             }
 
             .actions {
@@ -253,12 +270,14 @@ class EditEventForm extends React.Component {
           )}
         </div>
         <div className="actions">
-          <Button
-            className="blue save"
-            label={submitBtnLabel}
+          <StyledButton
+            buttonStyle="primary"
             onClick={this.handleSubmit}
-            disabled={this.state.disabled ? true : loading}
-          />
+            disabled={this.state.disabled}
+            loading={loading}
+          >
+            {submitBtnLabel}
+          </StyledButton>
         </div>
       </div>
     );

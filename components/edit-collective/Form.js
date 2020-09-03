@@ -181,8 +181,8 @@ class EditCollectiveForm extends React.Component {
         defaultMessage: 'Commission on financial contributions to Collectives you fiscally host.',
       },
       'location.label': {
-        id: 'collective.location.label',
-        defaultMessage: 'City',
+        id: 'SectionLocation.Title',
+        defaultMessage: 'Location',
       },
       'country.label': {
         id: 'collective.country.label',
